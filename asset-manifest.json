@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.js": "/ppl-finder/static/js/main.da65526a.chunk.js",
+    "main.js.map": "/ppl-finder/static/js/main.da65526a.chunk.js.map",
+    "runtime-main.js": "/ppl-finder/static/js/runtime-main.a59d854b.js",
+    "runtime-main.js.map": "/ppl-finder/static/js/runtime-main.a59d854b.js.map",
+    "static/js/2.7ec16fb9.chunk.js": "/ppl-finder/static/js/2.7ec16fb9.chunk.js",
+    "static/js/2.7ec16fb9.chunk.js.map": "/ppl-finder/static/js/2.7ec16fb9.chunk.js.map",
+    "index.html": "/ppl-finder/index.html",
+    "static/js/2.7ec16fb9.chunk.js.LICENSE.txt": "/ppl-finder/static/js/2.7ec16fb9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a59d854b.js",
+    "static/js/2.7ec16fb9.chunk.js",
+    "static/js/main.da65526a.chunk.js"
+  ]
+}
