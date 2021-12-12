@@ -17,11 +17,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v1
 
-      - name: Install and buikd
+      - name: Install and build
         run: npm install && npm run build
 
       - name: Deploy
-        uses: noabarm/github-pages-deploy-action@4.1.1
+        uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
           branch: gh-pages
           folder: build
