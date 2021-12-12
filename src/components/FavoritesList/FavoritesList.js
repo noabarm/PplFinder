@@ -6,21 +6,21 @@ import * as S from "./style";
 
 const FavoritesList = ({favoritesUsersList})=>{
 
-    const [updateFavoritList, setUpdateFavoritList] = useState([]);
+    const [updateFavoriteList, setUpdateFavoriteList] = useState([]);
     
     const removeFromFavorite = (user)=>{
-      let updateList = updateFavoritList.filter(function(item){
+      let updateList = updateFavoriteList.filter(function(item){
         return (item !== user);
       })
-      setUpdateFavoritList(updateList);
-      localStorage.setItem("favoritUsers", JSON.stringify(updateList));
+      setUpdateFavoriteList(updateList);
+      localStorage.setItem("favoriteUsers", JSON.stringify(updateList));
     };
     
   
     
  
     useEffect(()=>{ 
-      setUpdateFavoritList(favoritesUsersList);
+      setUpdateFavoriteList(favoritesUsersList);
     },[favoritesUsersList])
  
    
@@ -28,7 +28,7 @@ const FavoritesList = ({favoritesUsersList})=>{
     return (
       <S.UserList>
         <S.List>
-          {updateFavoritList.map((user, index) => {
+          {updateFavoriteList.map((user, index) => {
             return (
               <S.User
                 key={index}

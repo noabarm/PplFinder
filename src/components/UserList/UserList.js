@@ -8,13 +8,13 @@ import * as S from "./style";
 
 const UserList = ({ users, isLoading }) => {
   const [hoveredUserId, setHoveredUserId] = useState();
-  const [favoritUsers, setFavoritUsers] = useState([]);
+  const [favoriteUsers, setFavoriteUsers] = useState([]);
   const [userList,setUsers] = useState([]);
   const [selectedCountry,setCountry] = useState([]);
   const [countryList,setCountryList] = useState([]);
-  let localFavoritUsers = [...favoritUsers];
-  let [favoritUsersFromLocalStorage,setFavoritFromLS] = useState([]);
-  let favoritUsersToLocalStorage =[];
+  let localFavoriteUsers = [...favoriteUsers];
+  let [favoriteUsersFromLocalStorage,setFavoriteFromLS] = useState([]);
+  let favoriteUsersToLocalStorage =[];
 
   const handleMouseEnter = (index) => {
     setHoveredUserId(index);
@@ -26,16 +26,16 @@ const UserList = ({ users, isLoading }) => {
 
   
   const addToFavorite = (user)=>{
-    if(!favoritUsers.includes(user)){
-    localFavoritUsers =[...favoritUsers,user];
+    if(!favoriteUsers.includes(user)){
+    localFavoriteUsers =[...favoriteUsers,user];
     }else{
-    localFavoritUsers = localFavoritUsers.filter(function(item){
+    localFavoriteUsers = localFavoriteUsers.filter(function(item){
       return (item !== user);
     })
     }
-    setFavoritUsers(localFavoritUsers);
-    favoritUsersToLocalStorage = favoritUsersFromLocalStorage.concat(localFavoritUsers);
-    localStorage.setItem("favoritUsers", JSON.stringify(favoritUsersToLocalStorage));
+    setFavoriteUsers(localFavoriteUsers);
+    favoriteUsersToLocalStorage = favoriteUsersFromLocalStorage.concat(localFavoriteUsers);
+    localStorage.setItem("favoriteUsers", JSON.stringify(favoriteUsersToLocalStorage));
   };
   
 
@@ -67,18 +67,16 @@ const UserList = ({ users, isLoading }) => {
         }    
     });
     let newCountries= [...countryMap.entries()].sort((a,b)=> b[1] - a[1]).slice(0,5);
-    console.log(countryMap);
-    console.log(newCountries);
     setCountryList(newCountries);
   }
  
   useEffect(()=>{ 
     setUsers(users);
     getPopulerCuntries(users)
-    if(JSON.parse(localStorage.getItem("favoritUsers"))=== null){
-      setFavoritFromLS([]);
+    if(JSON.parse(localStorage.getItem("favoriteUsers"))=== null){
+      setFavoriteFromLS([]);
     }else{
-    setFavoritFromLS(JSON.parse(localStorage.getItem("favoritUsers")));
+    setFavoriteFromLS(JSON.parse(localStorage.getItem("favoriteUsers")));
     }
   },[users])
  
@@ -86,12 +84,6 @@ const UserList = ({ users, isLoading }) => {
   return (
     <S.UserList>
       <S.Filters>
-        {/*
-        <CheckBox value="BR" label="Brazil" onChange={filterByCountery} />
-        <CheckBox value="AU" label="Australia" onChange={filterByCountery} />
-        <CheckBox value="CA" label="Canada" onChange={filterByCountery} />
-        <CheckBox value="DE" label="Germany" onChange={filterByCountery}/>
-        */}
         {countryList.map((country)=>{
          return(
            <CheckBox  label={country[0]} onChange={filterByCountery} />
@@ -119,7 +111,7 @@ const UserList = ({ users, isLoading }) => {
                   {user?.location.city} {user?.location.country}
                 </Text>
               </S.UserInfo>
-              <S.IconButtonWrapper isVisible={index === hoveredUserId || favoritUsers.includes(user) }>
+              <S.IconButtonWrapper isVisible={index === hoveredUserId || favoriteUsers.includes(user) }>
                 <IconButton  onClick={()=>addToFavorite(user)}>
                   <FavoriteIcon color="error" />
                 </IconButton>

@@ -13,10 +13,10 @@ const Favorites = () =>{
     },[isListLoad])
 
     function getUserformLS() {
-      if(JSON.parse(localStorage.getItem("favoritUsers"))=== null){
+      if(JSON.parse(localStorage.getItem("favoriteUsers"))=== null){
         setUserformLS([]);
       }else{
-        const tempFavoritesList = JSON.parse(localStorage.getItem("favoritUsers"));
+        const tempFavoritesList = JSON.parse(localStorage.getItem("favoriteUsers"));
         setUserformLS(tempFavoritesList);
         setIsListLoad(true);
       }
