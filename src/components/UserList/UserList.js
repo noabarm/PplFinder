@@ -55,11 +55,26 @@ const UserList = ({ users, isLoading }) => {
     setCountry(newSelectedCountries);
     setUsers(filterUsers) 
   };
+
+  const getPopulerCuntries = (users) => {
+    let countryMap = new Map();
+    users.forEach(element => {
+        if (countryMap.get(element.location.country)!=null){
+          countryMap.set(element.location.country,countryMap.get(element.location.country)+1);
+        }
+        else{
+            countryMap.set(element.location.country,1);
+        }    
+    });
+    let newCountries= [...countryMap.entries()].sort((a,b)=> b[1] - a[1]).slice(0,5);
+    console.log(countryMap);
+    console.log(newCountries);
+    setCountryList(newCountries);
+  }
  
   useEffect(()=>{ 
     setUsers(users);
-    let newCoutries = [...new Set(users.map((user)=>user.location.country))];
-    setCountryList(newCoutries);
+    getPopulerCuntries(users)
     if(JSON.parse(localStorage.getItem("favoritUsers"))=== null){
       setFavoritFromLS([]);
     }else{
@@ -71,10 +86,17 @@ const UserList = ({ users, isLoading }) => {
   return (
     <S.UserList>
       <S.Filters>
+        {/*
         <CheckBox value="BR" label="Brazil" onChange={filterByCountery} />
         <CheckBox value="AU" label="Australia" onChange={filterByCountery} />
         <CheckBox value="CA" label="Canada" onChange={filterByCountery} />
         <CheckBox value="DE" label="Germany" onChange={filterByCountery}/>
+        */}
+        {countryList.map((country)=>{
+         return(
+           <CheckBox  label={country[0]} onChange={filterByCountery} />
+         )
+       })}
       </S.Filters>
       <S.List>
         {userList.map((user, index) => {
